@@ -9,5 +9,8 @@
         public string? ImageURL { get; set; }
         public float Estoque { get; set; }
         public DateTime DatCadastro { get; set; }
+
+        public int CategoriaID { get; set; }
+        public Categoria? Categoria { get; set; }
     }
 }
