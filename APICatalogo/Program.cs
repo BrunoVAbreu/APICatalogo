@@ -1,5 +1,6 @@
 using APICatalogo.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,7 +21,8 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-    app.MapScalarApiReference();
+    app.UseSwaggerUI(options => 
+        options.SwaggerEndpoint("/openapi/v1.json", "catalogo api"));
 }
 
 app.UseHttpsRedirection();
