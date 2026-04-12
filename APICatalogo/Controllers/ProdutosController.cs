@@ -17,11 +17,11 @@ namespace APICatalogo.Controllers
             _context = context;
         }
         [HttpGet]
-        public ActionResult<IEnumerable<Produto>> Get()
+        public async Task<ActionResult<IEnumerable<Produto>>> Get()
         {
             try
             {
-                return _context.Produtos.AsNoTracking().ToList();
+                return await _context.Produtos.AsNoTracking().ToListAsync();
             }
             catch (Exception)
             {
@@ -30,11 +30,11 @@ namespace APICatalogo.Controllers
         }
 
         [HttpGet("{id:int}", Name = "ObterProduto")]
-        public ActionResult<Produto> Get(int id)
+        public async Task<ActionResult<Produto>> Get(int id)
         {
             try
             {
-                var produto = _context.Produtos.FirstOrDefault(p => p.ProdutoID == id);
+                var produto = _context.Produtos.AsNoTracking().FirstOrDefaultAsync(p => p.ProdutoID == id);
                 if (produto is null)
                 {
                     return NotFound($"Produto com id={id}não encontrado...");
